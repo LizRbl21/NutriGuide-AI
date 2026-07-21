@@ -26,6 +26,56 @@ class NutritionEngine:
             .head(top_n)
         )
     
+    # Filtro general
+    def filter_foods(
+        self,
+        protein=None,
+        calories=None,
+        fiber=None,
+        sugar=None,
+        cholesterol=None,
+        sodium=None,
+        fat=None):
+
+        df = self.df.copy()
+
+        if protein is not None:
+            df = df[
+                df["Protein"] >= protein
+            ]
+
+        if calories is not None:
+            df = df[
+                df["Caloric Value"] <= calories
+            ]
+
+        if fiber is not None:
+            df = df[
+                df["Dietary Fiber"] >= fiber
+            ]
+
+        if sugar is not None:
+            df = df[
+                df["Sugars"] <= sugar
+            ]
+        
+        if cholesterol is not None:
+            df = df[
+                df["Cholesterol"] <= cholesterol
+            ]
+        
+        if sodium is not None:
+            df = df[
+                df["Sodium"] <= sodium
+            ]
+        
+        if fat is not None:
+            df = df[
+                df["Fat"] <= fat
+            ]
+
+        return df
+    
     # Filtros por valores
     ## Calorias
     def calories_less_than(self, calories):
